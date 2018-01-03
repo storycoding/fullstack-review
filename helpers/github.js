@@ -15,27 +15,21 @@ let getReposByUsername = (term, callback) => {
     }
   };
 
-  function callback(error, response, body) { // causing infinite loop
-    
     //console.log('body = ', body);
     //console.log('error = ', error);
     //console.log('response = ', response);
-    console.log('reached getReposByUsername');    
+    //console.log('reached getReposByUsername');    
 
-
+  request(options, function(error, response) {
+    
     if (error) {
-      console.log('errored in getReposByUsername');
-      callback(error);
-      //console.log('error = ', error);
-      
-      
+      callback(error,null);
+
     } else {
       console.log('succeeded in getReposByUsername'); 
-      callback(body);
+      callback(null, response);
     }
-  }
-
-  request(options, callback);
+  });
 
 };
 

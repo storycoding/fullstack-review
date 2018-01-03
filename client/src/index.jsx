@@ -23,8 +23,9 @@ class App extends React.Component {
 
   search (term) {
     console.log(`${term} was searched`);
-    //send to the server
     
+    let thisapp = this;
+
     $.ajax({
       method: 'POST',
       url: '/repos',
@@ -32,30 +33,23 @@ class App extends React.Component {
       contentType: 'application/json',
 
       success: function(data){
-        console.log(JSON.parse(data),' successfully posted!');
-        //this.setState(data)// add repos here from response
+        console.log(data.body,' successfully posted!');
+        thisapp.setState({repos: JSON.parse(data.body)});// add repos here from response
       },
       error: function(data){
-        console.log()
-        console.log(data,' failed to post :(');
+        console.error(error);
       }
-
-      
     });
-    //ajax request to server with the '/repos' endpoint
-    
-    // api get    
-      // db post
-      // update state in app
-
-    //at the end, change the state of the app
   }
 
   render () {
+    console.log('app state.repos = ',this.state.repos[0])
+
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
       <Search onSearch={this.search.bind(this)}/>
+      <RepoList repos={this.state.repos}/>
+      
     </div>)
   }
 }

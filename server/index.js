@@ -16,12 +16,16 @@ app.post('/repos', function (req, res) {
   
   console.log('REQUEST MADE, BODY = username: ',req.body.username);
 
-  GitHelper.getReposByUsername(req.body.username, function(repos){
-  
-    console.log('GOT THE REPOS ON GITHELPER')
-    res.status(201);
-    res.send(repos);
-    res.end();
+  GitHelper.getReposByUsername(req.body.username, function(error ,repos){
+    if (error) {
+      console.error(error);
+    } else {
+      console.log('GOT THE REPOS ON GITHELPER')
+      res.status(201);
+      res.send(repos);
+      res.end();
+    }
+    
   });
   
   // and get the repo information from the github API, then

@@ -4,14 +4,20 @@ const RepoList = (props) => (
   <div>
     <h4> Repo List Component </h4>
     There are {props.repos.length} repos.
-    <Repo Entry={props.repos[0]} />
+    
+    {props.repos.map(function(repo, index){
+      return (<Repo key={index} Entry={repo} />);
+      })
+    }
+    
   </div>
 );
 
 export default RepoList;
 
 const Repo = function(props) {
-  console.dir(props);
+  
+  console.log('props passed to repo = ', props);  
 
   let privacy;
   let timeAgo = ' ' + props.Entry.updated_at.slice(0, props.Entry.updated_at.indexOf('T'));
