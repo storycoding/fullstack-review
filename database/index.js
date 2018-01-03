@@ -8,48 +8,48 @@ db.once('open', function() {
   console.log('Fetcher is up and running!');
 });
 
-//db.createCollection('gitList'); // this is the terminal version
+//db.createCollection('gitList'); // this is the terminal version, does it work here?
+
 let repoSchema = mongoose.Schema({
-
-
-    //title
-    "full-name" : string,
-        // hrsf86-self-assessment-week-04-v3
-        // LINKS TO THE FORKED REPO
-
-    //forked repo URL
-              
-    //public: boolean
+    "full-name" : string,         
     "private": boolean,
-
-    //forked from + origin
-        // hackreactor/hrsf86-self-assessment-week-04-v3
-        //LINKS TO THE ORIGINAL REPO
-
-    //original repo URL
-
-    //coding language // undefined
-    
-
-    //number of forks
     "forks_count": number,
-        //LINKS TO URL + /network
-    //Redundant...
-
-    // forked repo url + /network
-
-    //last updated // creation date
-    "updated_at": string
+    "updated_at": string,
+    "name" : string,
+    "language" : string
+    //forked repo URL
+    //original repo URL
+    //coding language // undefined
+    // LINKS TO THE FORKED REPO
+    //LINKS TO THE ORIGINAL REPO
+    //forked from + origin
+      // hackreactor/hrsf86-self-assessment-week-04-v3
 });
+
+
 const admim = db.createUser({
     user: 'admin',
     pwd: '',
     roles: [ ‘readWrite’, ‘dbAdmin’ ]
 });
+
 let Repo = mongoose.model('Repo', repoSchema);
-let save = (/* TODO */) => {
-  // TODO: Your code here
-  // This function should save a repo or repos to
-  // the MongoDB
+
+let save = (repos) => {
+  
+  for (var i = 0; i < Things.length; i++) {
+
+    db.Repo.insert(
+      {
+        language:’Javascript’,
+        forks_count: repos[i].forks_count,
+        full_name : repos[i].full_name,
+        name : repos[i].name,
+        private : repos[i].private, 
+        updated_at : repos[i].updated_at
+      }
+    );
+  }
+
 }
 module.exports.save = save;

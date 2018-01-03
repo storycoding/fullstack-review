@@ -1,16 +1,25 @@
 const express = require('express');
 let app = express();
+let parser = require('body-parser');
+
+//call the index.js database and post get
+const GitHelper = require('../helpers/github.js');
+
+app.use(parser);
 
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/repos', function (req, res) {
   // TODO - your code here!
   // This route should take the github username provided
+  GitHelper.getReposByUsername()
+  
   // and get the repo information from the github API, then
   // save the repo information in the database
 });
 
 app.get('/repos', function (req, res) {
+ res.send('stuff got gotten!');
   // TODO - your code here!
   // This route should send back the top 25 repos
 });
