@@ -21,3 +21,10 @@ app.listen(port, function() {
   console.log(`listening on port ${port}`);
 });
 
+// react app.search
+  // DB post request triggers API get request
+    // query for latest / top 25 results
+  // post results to the DB
+  // DB get request
+  // react app.setState 
+// repo list re-renders
