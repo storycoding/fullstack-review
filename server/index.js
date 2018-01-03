@@ -5,14 +5,24 @@ let parser = require('body-parser');
 //call the index.js database and post get
 const GitHelper = require('../helpers/github.js');
 
-app.use(parser);
+app.use(parser.json()); // needs to be invoked
 
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/repos', function (req, res) {
   // TODO - your code here!
   // This route should take the github username provided
-  GitHelper.getReposByUsername()
+  //GitHelper.getReposByUsername()
+  
+  console.log('REQUEST MADE, BODY = username: ',req.body.username);
+
+  GitHelper.getReposByUsername(req.body.username, function(repos){
+  
+    console.log('GOT THE REPOS ON GITHELPER')
+    res.status(201);
+    res.send(repos);
+    res.end();
+  });
   
   // and get the repo information from the github API, then
   // save the repo information in the database

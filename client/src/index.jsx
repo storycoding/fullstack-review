@@ -26,10 +26,21 @@ class App extends React.Component {
     //send to the server
     
     $.ajax({
+      method: 'POST',
       url: '/repos',
-      data: JSON.stringify({username: term}),
-      success: function(){}, //             <<---------- SORT THIS OUT
-      contentType: 'application/json'
+      data: JSON.stringify({'username': term}),
+      contentType: 'application/json',
+
+      success: function(data){
+        console.log(JSON.parse(data),' successfully posted!');
+        //this.setState(data)// add repos here from response
+      },
+      error: function(data){
+        console.log()
+        console.log(data,' failed to post :(');
+      }
+
+      
     });
     //ajax request to server with the '/repos' endpoint
     
