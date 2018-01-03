@@ -9,14 +9,6 @@ class App extends React.Component {
     super(props);
     this.state = { 
       repos: [
-        {
-          coding_language : 'javascript',
-          forks_count: 32,
-          full_name : 'octocat/git-consortium',
-          name : 'git-consortium',
-          private : false,  
-          updated_at :'2016-12-06T13:06:37Z'
-        }
       ]
     }
   }
@@ -46,7 +38,7 @@ class App extends React.Component {
     console.log('app state.repos = ',this.state.repos[0])
 
     return (<div>
-      <h1>Github Fetcher</h1>
+      <h1 className="margin-left">Github Fetcher</h1>
       <Search onSearch={this.search.bind(this)}/>
       <RepoList repos={this.state.repos}/>
       
