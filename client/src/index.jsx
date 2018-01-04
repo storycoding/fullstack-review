@@ -25,7 +25,6 @@ class App extends React.Component {
       contentType: 'application/json',
 
       success: function(data){
-        console.log(data.body,' successfully posted!');
         thisapp.setState({repos: JSON.parse(data.body)});// add repos here from response
       },
       error: function(data){
@@ -35,7 +34,7 @@ class App extends React.Component {
   }
 
   render () {
-    console.log('app state.repos = ',this.state.repos[0])
+    //console.log('app state.repos = ',this.state.repos[0])
 
     return (<div>
       <h1 className="margin-left">Github Fetcher</h1>

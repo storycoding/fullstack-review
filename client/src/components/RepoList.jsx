@@ -17,7 +17,7 @@ export default RepoList;
 
 const Repo = function(props) {
   
-  console.log('props passed to repo = ', props);  
+  //console.log('props passed to repo = ', props);  
 
   let privacy;
   let timeAgo = ' ' + props.Entry.updated_at.slice(0, props.Entry.updated_at.indexOf('T'));

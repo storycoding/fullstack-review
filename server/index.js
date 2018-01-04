@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const parser = require('body-parser');
-//const save = require('../database/index.js');
+const db = require('../database/index.js');
 
 //call the index.js database and post get
 const GitHelper = require('../helpers/github.js');
@@ -21,7 +21,7 @@ app.post('/repos', function (req, res) {
 
     } else {
       console.log('GOT THE REPOS ON GITHELPER');
-    
+      db.save(repos.body)  
       res.status(201);
       res.send(repos);
       res.end();
@@ -34,8 +34,11 @@ app.post('/repos', function (req, res) {
 });
 
 app.get('/repos', function (req, res) {
- res.send('stuff got gotten!');
-  // TODO - your code here!
+  db.model('Repo').find(function(err, repos) {
+    res.send(repos);
+  })
+  
+  
   // This route should send back the top 25 repos
 });
 
